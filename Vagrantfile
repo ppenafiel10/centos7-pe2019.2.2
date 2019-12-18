@@ -44,32 +44,32 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 ###################
 ## Develpment VM ##
 ###################
-  # Define the Development VM Characteristics
-  config.vm.define 'development' do |development|
-    development.vm.box = 'puppetlabs/centos-7.2-64-nocm'
-    development.vm.network :private_network, :ip => '10.10.100.110'
-    development.vm.hostname = 'development.puppetlabs.vm'
+#  # Define the Development VM Characteristics
+#  config.vm.define 'development' do |development|
+#    development.vm.box = 'puppetlabs/centos-7.2-64-nocm'
+#    development.vm.network :private_network, :ip => '10.10.100.110'
+#    development.vm.hostname = 'development.puppetlabs.vm'
 
-  # Configure Development VM Settings
-  development.vm.provider :virtualbox do |settings|
-    settings.memory = 512
-    settings.name = "c7development_2019.2.2"
-    settings.cpus = 1
-  end
+#  # Configure Development VM Settings
+#  development.vm.provider :virtualbox do |settings|
+#    settings.memory = 512
+#    settings.name = "c7development_2019.2.2"
+#    settings.cpus = 1
+#  end
 
-  # Add all other hosts for environment
-  development.vm.provision :hosts do |entries|
-    entries.add_host '10.10.100.100', ['master.puppetlabs.vm', 'master']
-    entries.add_host '10.10.100.110', ['development.puppetlabs.vm', 'development']
-    entries.add_host '10.10.100.111', ['production.puppetlabs.vm', 'production']
-  end
+#  # Add all other hosts for environment
+#  development.vm.provision :hosts do |entries|
+#    entries.add_host '10.10.100.100', ['master.puppetlabs.vm', 'master']
+#    entries.add_host '10.10.100.110', ['development.puppetlabs.vm', 'development']
+#    entries.add_host '10.10.100.111', ['production.puppetlabs.vm', 'production']
+#  end
 
-  # Set the PE Role of This Node
-  development.vm.provision :pe_agent do |provisioner|
-    provisioner.master = 'master.puppetlabs.vm'
-  end
-    development.vm.provision :shell, path: "provision/development.sh"
-  end
+#  # Set the PE Role of This Node
+#  development.vm.provision :pe_agent do |provisioner|
+#    provisioner.master = 'master.puppetlabs.vm'
+#  end
+#    development.vm.provision :shell, path: "provision/development.sh"
+#  end
 
 ###################
 ## Production VM ##
